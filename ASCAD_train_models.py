@@ -2,19 +2,19 @@ import os.path
 import sys
 import h5py
 import numpy as np
-from keras.models import Model, Sequential
-from keras.layers import Flatten, Dense, Input, Conv1D, MaxPooling1D, GlobalAveragePooling1D, GlobalMaxPooling1D, AveragePooling1D
-from keras.engine.topology import get_source_inputs
-from keras.utils import layer_utils
-from keras.utils.data_utils import get_file
-from keras import backend as K
-from keras.applications.imagenet_utils import decode_predictions
-from keras.applications.imagenet_utils import preprocess_input
-from keras.applications.imagenet_utils import _obtain_input_shape
-from keras.optimizers import RMSprop
-from keras.callbacks import ModelCheckpoint
-from keras.utils import to_categorical
-from keras.models import load_model
+from tensorflow.keras.models import Model, Sequential
+from tensorflow.keras.layers import Flatten, Dense, Input, Conv1D, MaxPooling1D, GlobalAveragePooling1D, GlobalMaxPooling1D, AveragePooling1D
+#from tensorflow.keras.engine.topology import get_source_inputs
+from tensorflow.keras.utils import get_source_inputs 
+from tensorflow.keras.utils import get_file
+from tensorflow.keras import backend as K
+#from tensorflow.keras.applications.imagenet_utils import decode_predictions
+#from tensorflow.keras.applications.imagenet_utils import preprocess_input
+#from tensorflow.keras.applications.imagenet_utils import _obtain_input_shape
+from tensorflow.keras.optimizers import RMSprop
+from tensorflow.keras.callbacks import ModelCheckpoint
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.models import load_model
 
 def check_file_exists(file_path):
 	if os.path.exists(file_path) == False:
@@ -139,21 +139,21 @@ ascad_trained_models_folder = ascad_data_folder + "ASCAD_trained_models/"
 ### CNN training
 #### No desync
 cnn_best_model = cnn_best()
-train_model(X_profiling, Y_profiling, cnn_best_model, ascad_trained_models_folder + "my_cnn_best_desync0_epochs75_batchsize200.h5", epochs=75, batch_size=200)
+train_model(X_profiling, Y_profiling, cnn_best_model, ascad_trained_models_folder + "my_cnn_best_desync0_epochs75_batchsize200.h5", epochs=7, batch_size=200)
 #### Desync = 50
 cnn_best_model = cnn_best()
-train_model(X_profiling_desync50, Y_profiling_desync50, cnn_best_model, ascad_trained_models_folder + "my_cnn_best_desync50_epochs75_batchsize200.h5", epochs=75, batch_size=200)
+train_model(X_profiling_desync50, Y_profiling_desync50, cnn_best_model, ascad_trained_models_folder + "my_cnn_best_desync50_epochs75_batchsize200.h5", epochs=7, batch_size=200)
 #### Desync = 100
 cnn_best_model = cnn_best()
-train_model(X_profiling_desync100, Y_profiling_desync100, cnn_best_model, ascad_trained_models_folder + "my_cnn_best_desync100_epochs75_batchsize200.h5", epochs=75, batch_size=200)
+train_model(X_profiling_desync100, Y_profiling_desync100, cnn_best_model, ascad_trained_models_folder + "my_cnn_best_desync100_epochs75_batchsize200.h5", epochs=7, batch_size=200)
 
 ### MLP training
 #### No desync
 mlp_best_model = mlp_best()
-train_model(X_profiling, Y_profiling, mlp_best_model, ascad_trained_models_folder + "my_mlp_best_desync0_epochs200_batchsize100.h5", epochs=200, batch_size=100)
+train_model(X_profiling, Y_profiling, mlp_best_model, ascad_trained_models_folder + "my_mlp_best_desync0_epochs200_batchsize100.h5", epochs=20, batch_size=100)
 #### Desync = 50
 mlp_best_model = mlp_best()
-train_model(X_profiling_desync50, Y_profiling_desync50, mlp_best_model, ascad_trained_models_folder + "my_mlp_best_desync50_epochs200_batchsize100.h5", epochs=200, batch_size=100)
+train_model(X_profiling_desync50, Y_profiling_desync50, mlp_best_model, ascad_trained_models_folder + "my_mlp_best_desync50_epochs200_batchsize100.h5", epochs=20, batch_size=100)
 #### Desync = 100
 mlp_best_model = mlp_best()
-train_model(X_profiling_desync100, Y_profiling_desync100, mlp_best_model, ascad_trained_models_folder + "my_mlp_best_desync100_epochs200_batchsize100.h5", epochs=200, batch_size=100)
+train_model(X_profiling_desync100, Y_profiling_desync100, mlp_best_model, ascad_trained_models_folder + "my_mlp_best_desync100_epochs200_batchsize100.h5", epochs=20, batch_size=100)
